@@ -1,3 +1,38 @@
+# Public Website's Health Monitoring App
+This project is about monitoring the health of public websites by measuring availability, and latency.
+
+# Motivation
+This project represents a part of my journey towards mastering cloud DevOps on Amazon Web Services(AWS). It shows that I can use AWS CDK in python for deploying AWS Lambda functions periodically.
+
+# Screenshots
+#### AWS CloudWatch Metrics
+![image](https://user-images.githubusercontent.com/92221357/137349629-3123ce5a-e2cd-414a-b3c4-db41afcbfd91.png)
+
+#### Stack Map built by Cloud Formation after Deployment
+
+![image](https://user-images.githubusercontent.com/92221357/137350814-96a53dee-514e-4b69-a897-8349e0770d58.png)
+
+# Tech/Frameworks Used
+
+<b>Built with</b>
+<ul>
+  <li>Python</li>
+  <li>AWS CDK</li>
+</ul>
+
+# Features
+This project contains the following features:
+<ul>
+  <li>It contains a fully functioning AWS stack configuring in infra_stack.py file.</li>
+  <li>Contains AWS Lambda Scheduling and you can easily change the duration by changing the minutes specified in the infra_stack.py file</li>
+  <li>Contains a web_constants.py file where you can add/remove urls in a list called URL</li>
+</ul>
+
+# Code Explanation
+
+## AWS CDK Stack
+
+
 
 # Welcome to your CDK Python project!
 
