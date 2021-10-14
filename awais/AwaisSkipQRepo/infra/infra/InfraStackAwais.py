@@ -6,6 +6,8 @@ from aws_cdk import core as cdk
 # being updated to use `cdk`.  You may delete this import if you don't need it.
 from aws_cdk import core
 from aws_cdk import aws_lambda as lambda_
+from aws_cdk import aws_iam
+from aws_cdk import aws_events,aws_events_targets
 
 class InfraStackAwais(cdk.Stack):
     
@@ -13,8 +15,11 @@ class InfraStackAwais(cdk.Stack):
         super().__init__(scope, construct_id, **kwargs)
         
         # The code that defines your stack goes here
-        hw_lambda = self.create_lambda("AwaisSkipq", './lambda', 'availabilityAndLatencyCalculator.uptime')
-        
+        web_health_lambda = self.create_lambda("AwaisSkipq", './lambda', 'availabilityAndLatencyCalculator.uptime')
+        lambda_schedule = aws_events.Schedule.rate(core.Duration.minutes(5))
+        event_lambda_target = aws_events_targets.LambdaFunction(handler = web_health_lambda)
+        lambda_run_rule = aws_events.Rule(self, "web_health_lamda_rule", description = "periodic lambda", 
+        schedule = lambda_schedule, targets = [event_lambda_target])
     def create_lambda(self,id,asset, handler):
         return lambda_.Function(self, id,
         code = lambda_.Code.asset(asset),
