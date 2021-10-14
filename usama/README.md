@@ -1,8 +1,8 @@
-##  Web Health Monitoring Lambda Function
+#  Web Health Monitoring Lambda Function
 
-# This is a lambda function, able to compute availability and latency of "skipq.org" after every specific time duration
+## This is a lambda function, able to compute availability and latency of "skipq.org" after every specific time duration
 
-# Guidelines to Run the project
+## Guidelines to Run the project
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
