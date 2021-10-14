@@ -1,4 +1,3 @@
-
 import constants
 import requests
 
@@ -25,7 +24,7 @@ def get_latency(url: str):
     
 def get_availability(url: str):
     response = requests.head(url)
-    return response.status_code
+    return True if response.status_code==200 else False
     
     
 
