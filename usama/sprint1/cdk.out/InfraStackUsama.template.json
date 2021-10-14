@@ -39,7 +39,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": {
-            "Ref": "AssetParameterscefe6c2ceffb7a33bc8a483180f488555c570e34d29f6c90a504181129af3d51S3Bucket0D1EDF1D"
+            "Ref": "AssetParameters3e5d1abf219cc4b44934567e5e5e989698413c159b2783d4d5842824fd99066eS3Bucket90EA51C6"
           },
           "S3Key": {
             "Fn::Join": [
@@ -52,7 +52,7 @@
                       "Fn::Split": [
                         "||",
                         {
-                          "Ref": "AssetParameterscefe6c2ceffb7a33bc8a483180f488555c570e34d29f6c90a504181129af3d51S3VersionKey6D0E49CF"
+                          "Ref": "AssetParameters3e5d1abf219cc4b44934567e5e5e989698413c159b2783d4d5842824fd99066eS3VersionKey95A21325"
                         }
                       ]
                     }
@@ -65,7 +65,7 @@
                       "Fn::Split": [
                         "||",
                         {
-                          "Ref": "AssetParameterscefe6c2ceffb7a33bc8a483180f488555c570e34d29f6c90a504181129af3d51S3VersionKey6D0E49CF"
+                          "Ref": "AssetParameters3e5d1abf219cc4b44934567e5e5e989698413c159b2783d4d5842824fd99066eS3VersionKey95A21325"
                         }
                       ]
                     }
@@ -89,7 +89,7 @@
       ],
       "Metadata": {
         "aws:cdk:path": "InfraStackUsama/AndromedaLambda/Resource",
-        "aws:asset:path": "asset.cefe6c2ceffb7a33bc8a483180f488555c570e34d29f6c90a504181129af3d51",
+        "aws:asset:path": "asset.3e5d1abf219cc4b44934567e5e5e989698413c159b2783d4d5842824fd99066e",
         "aws:asset:property": "Code"
       }
     },
@@ -148,17 +148,17 @@
     }
   },
   "Parameters": {
-    "AssetParameterscefe6c2ceffb7a33bc8a483180f488555c570e34d29f6c90a504181129af3d51S3Bucket0D1EDF1D": {
+    "AssetParameters3e5d1abf219cc4b44934567e5e5e989698413c159b2783d4d5842824fd99066eS3Bucket90EA51C6": {
       "Type": "String",
-      "Description": "S3 bucket for asset \"cefe6c2ceffb7a33bc8a483180f488555c570e34d29f6c90a504181129af3d51\""
+      "Description": "S3 bucket for asset \"3e5d1abf219cc4b44934567e5e5e989698413c159b2783d4d5842824fd99066e\""
     },
-    "AssetParameterscefe6c2ceffb7a33bc8a483180f488555c570e34d29f6c90a504181129af3d51S3VersionKey6D0E49CF": {
+    "AssetParameters3e5d1abf219cc4b44934567e5e5e989698413c159b2783d4d5842824fd99066eS3VersionKey95A21325": {
       "Type": "String",
-      "Description": "S3 key for asset version \"cefe6c2ceffb7a33bc8a483180f488555c570e34d29f6c90a504181129af3d51\""
+      "Description": "S3 key for asset version \"3e5d1abf219cc4b44934567e5e5e989698413c159b2783d4d5842824fd99066e\""
     },
-    "AssetParameterscefe6c2ceffb7a33bc8a483180f488555c570e34d29f6c90a504181129af3d51ArtifactHash39136BA8": {
+    "AssetParameters3e5d1abf219cc4b44934567e5e5e989698413c159b2783d4d5842824fd99066eArtifactHash0E37CCBB": {
       "Type": "String",
-      "Description": "Artifact hash for asset \"cefe6c2ceffb7a33bc8a483180f488555c570e34d29f6c90a504181129af3d51\""
+      "Description": "Artifact hash for asset \"3e5d1abf219cc4b44934567e5e5e989698413c159b2783d4d5842824fd99066e\""
     }
   },
   "Conditions": {
