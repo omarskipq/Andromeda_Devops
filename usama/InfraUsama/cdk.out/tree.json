@@ -1,0 +1,318 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Construct",
+          "version": "1.122.0"
+        }
+      },
+      "InfraStackUsama": {
+        "id": "InfraStackUsama",
+        "path": "InfraStackUsama",
+        "children": {
+          "AndromedaLambda": {
+            "id": "AndromedaLambda",
+            "path": "InfraStackUsama/AndromedaLambda",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "InfraStackUsama/AndromedaLambda/ServiceRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "InfraStackUsama/AndromedaLambda/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.CfnRole",
+                      "version": "1.122.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.Role",
+                  "version": "1.122.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "InfraStackUsama/AndromedaLambda/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "InfraStackUsama/AndromedaLambda/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.AssetStaging",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "InfraStackUsama/AndromedaLambda/Code/AssetBucket",
+                    "children": {
+                      "Notifications": {
+                        "id": "Notifications",
+                        "path": "InfraStackUsama/AndromedaLambda/Code/AssetBucket/Notifications",
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/core.Construct",
+                          "version": "1.122.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-s3.BucketBase",
+                      "version": "1.122.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-s3-assets.Asset",
+                  "version": "1.122.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "InfraStackUsama/AndromedaLambda/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Ref": "AssetParameterscefe6c2ceffb7a33bc8a483180f488555c570e34d29f6c90a504181129af3d51S3Bucket0D1EDF1D"
+                      },
+                      "s3Key": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Fn::Select": [
+                                0,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameterscefe6c2ceffb7a33bc8a483180f488555c570e34d29f6c90a504181129af3d51S3VersionKey6D0E49CF"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Fn::Select": [
+                                1,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameterscefe6c2ceffb7a33bc8a483180f488555c570e34d29f6c90a504181129af3d51S3VersionKey6D0E49CF"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "AndromedaLambdaServiceRoleE7B3BDA6",
+                        "Arn"
+                      ]
+                    },
+                    "handler": "web_health_publisher.health_monitor",
+                    "runtime": "python3.6"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-lambda.CfnFunction",
+                  "version": "1.122.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-lambda.Function",
+              "version": "1.122.0"
+            }
+          },
+          "AssetParameters": {
+            "id": "AssetParameters",
+            "path": "InfraStackUsama/AssetParameters",
+            "children": {
+              "cefe6c2ceffb7a33bc8a483180f488555c570e34d29f6c90a504181129af3d51": {
+                "id": "cefe6c2ceffb7a33bc8a483180f488555c570e34d29f6c90a504181129af3d51",
+                "path": "InfraStackUsama/AssetParameters/cefe6c2ceffb7a33bc8a483180f488555c570e34d29f6c90a504181129af3d51",
+                "children": {
+                  "S3Bucket": {
+                    "id": "S3Bucket",
+                    "path": "InfraStackUsama/AssetParameters/cefe6c2ceffb7a33bc8a483180f488555c570e34d29f6c90a504181129af3d51/S3Bucket",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "S3VersionKey": {
+                    "id": "S3VersionKey",
+                    "path": "InfraStackUsama/AssetParameters/cefe6c2ceffb7a33bc8a483180f488555c570e34d29f6c90a504181129af3d51/S3VersionKey",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.122.0"
+                    }
+                  },
+                  "ArtifactHash": {
+                    "id": "ArtifactHash",
+                    "path": "InfraStackUsama/AssetParameters/cefe6c2ceffb7a33bc8a483180f488555c570e34d29f6c90a504181129af3d51/ArtifactHash",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.122.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Construct",
+                  "version": "1.122.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.122.0"
+            }
+          },
+          "AndromedaLambdaPeriodic": {
+            "id": "AndromedaLambdaPeriodic",
+            "path": "InfraStackUsama/AndromedaLambdaPeriodic",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "InfraStackUsama/AndromedaLambdaPeriodic/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Events::Rule",
+                  "aws:cdk:cloudformation:props": {
+                    "scheduleExpression": "rate(5 minutes)",
+                    "state": "ENABLED",
+                    "targets": [
+                      {
+                        "id": "Target0",
+                        "arn": {
+                          "Fn::GetAtt": [
+                            "AndromedaLambda97CC7260",
+                            "Arn"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-events.CfnRule",
+                  "version": "1.122.0"
+                }
+              },
+              "AllowEventRuleInfraStackUsamaAndromedaLambdaB062D36A": {
+                "id": "AllowEventRuleInfraStackUsamaAndromedaLambdaB062D36A",
+                "path": "InfraStackUsama/AndromedaLambdaPeriodic/AllowEventRuleInfraStackUsamaAndromedaLambdaB062D36A",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunction",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "AndromedaLambda97CC7260",
+                        "Arn"
+                      ]
+                    },
+                    "principal": "events.amazonaws.com",
+                    "sourceArn": {
+                      "Fn::GetAtt": [
+                        "AndromedaLambdaPeriodicC6217843",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-lambda.CfnPermission",
+                  "version": "1.122.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-events.Rule",
+              "version": "1.122.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "InfraStackUsama/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "InfraStackUsama/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnResource",
+                  "version": "1.122.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "InfraStackUsama/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnCondition",
+                  "version": "1.122.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.122.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Stack",
+          "version": "1.122.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "@aws-cdk/core.App",
+      "version": "1.122.0"
+    }
+  }
+}
