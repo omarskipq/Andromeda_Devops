@@ -1,0 +1,12 @@
+# CDK Context & Staging files
+cdk.context.json
+.cdk.staging/
+ifra/cdk.out/
+*.tabl.json
+
+# We don't want tsconfig at the root
+/tsconfig.json
+
+# Cloud9
+.c9
+.nzm-*
