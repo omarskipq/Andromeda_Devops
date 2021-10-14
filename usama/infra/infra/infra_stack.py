@@ -17,15 +17,12 @@ class InfraStackUsama(cdk.Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         # The code that defines your stack goes here
-        # hw_lambda = self.create_lambda('AndromedaLambda', './lambda', 'handler.lambda_handler')
         web_health_lambda = self.create_lambda('AndromedaLambda', './lambda', 'web_health_publisher.health_monitor')
-        # lambda_schedule = aws_events.Schedule.rate(core.Duration.minutes(5))
-        # target_lambda = aws_events_targets.LambdaFunction(web_health_lambda)
-        # Run_Rule = aws_events.Rule(self, 'AndromedaLambdaPeriodic', schedule = lambda_schedule, targets = [target_lambda])
         self.periodic_lambda("AndromedaLambdaPeriodic", 5, web_health_lambda)
         
     
     def create_lambda(self, id, asset, handler):
+        
         return lambda_.Function(self, id,
         code=lambda_.Code.asset(asset),
         handler=handler,
