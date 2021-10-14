@@ -2,7 +2,7 @@ import constants
 import urllib3 
 import time
 
-
+# Monitoring the health of all websites in constants.py
 def health_web(event, context):
     web_metric = dict()
     for url in constants.URLS_TO_MONITOR:
@@ -10,7 +10,7 @@ def health_web(event, context):
     
     return web_metric
 
-    
+# Function to measure the availability and latency of website    
 def get_availability_latency(url):
     
     latency_availability= dict()  # Initializing an empty dictionary

@@ -1,4 +1,6 @@
-cription
+# Title : Cloud DevOps Project -- Periodic Lambda
+
+# Description
 This lambda function is scheduled to called every five minutes to track the latency and 
 availability of our website to monitor its health.
 
