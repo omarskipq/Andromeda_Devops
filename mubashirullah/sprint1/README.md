@@ -1,7 +1,10 @@
 
 # Welcome to a simple Web Health App using Cloudwatch and AWS Lambda
 
-Simply clone the repo in an environment where you have the CDK up and running
+This simply app creates a Lambda function and deploys it on AWS. Every 5 minutes it checks if SkipQ.org's website is available
+and what latency the request has.
+
+Simply clone the repo in an environment where you have the CDK up and running.
 
 To manually create a virtualenv on MacOS and Linux:
 

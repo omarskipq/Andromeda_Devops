@@ -15,7 +15,6 @@ class InfraStackMubashirWebHealth(cdk.Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         # The code that defines your stack goes here
-        #hw_lambda = self.create_lambda("Andromeda_mubashir", "./lambda", "handler.lambda_handler")
         web_health_lambda = self.create_lambda("Mubashir_WebHealth", "./lambda", "web.lambda_health")
         
         
@@ -29,6 +28,6 @@ class InfraStackMubashirWebHealth(cdk.Stack):
     
     def create_lambda(self, id, asset, handler):
         return lambda_.Function(self, id, 
-        code=lambda_.Code.asset(asset),
-        handler=handler,
-        runtime=lambda_.Runtime.PYTHON_3_6)
+            code=lambda_.Code.asset(asset),
+            handler=handler,
+            runtime=lambda_.Runtime.PYTHON_3_6)
