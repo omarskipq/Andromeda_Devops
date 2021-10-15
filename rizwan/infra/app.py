@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Importing libraries 
 import os
 
 from aws_cdk import core as cdk
@@ -7,11 +8,13 @@ from aws_cdk import core as cdk
 # the CDK's core module.  The following line also imports it as `core` for use
 # with examples from the CDK Developer's Guide, which are in the process of
 # being updated to use `cdk`.  You may delete this import if you don't need it.
+
+
 from aws_cdk import core
 
 from infra.infra_stack import InfraStackRizwan
 
-
+# InfraStack has been named InfraStackRizwan to avoid overwritting Lambda function deployed by other students
 app = core.App()
 InfraStackRizwan(app, "InfraStackRizwan",
     # If you don't specify 'env', this stack will be environment-agnostic.
