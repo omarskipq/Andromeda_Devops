@@ -1,5 +1,5 @@
-#Web Health Monitering
-###SkipQ Cohort 2021: Sprint One
+# Web Health Monitering
+### SkipQ Cohort 2021: Sprint One
 This project implements a periodic lambda function to check a website status
 
 ## Project Functional Requirements
