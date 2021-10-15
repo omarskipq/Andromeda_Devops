@@ -13,7 +13,11 @@ class InfraStackFaheem(cdk.Stack):
 
     def __init__(self, scope: cdk.Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
-
+        """
+        InfraStackFaheem Construct: which is used to create a lambda function for the
+        monitoring of the web health. 
+        AWS Schedule Event For AWS Lambda is declared to run it periodically for 5 minutes
+        """
         # The code that defines your stack goes here
         # hw_lambda = self.create_lambda('FaheemLambda', './lambda','handler.lambda_handler') 
         web_health_lambda = self.create_lambda('FaheemLambda', './lambda','web_health_publisher.health_web')
@@ -26,6 +30,17 @@ class InfraStackFaheem(cdk.Stack):
             
     
     def create_lambda(self, id, asset, handler):
+        """
+        Invokes aws_lambda class Function
+        
+        Args:
+            id (str) : Contains a string i.e. our name of our lambda function
+            asset (str) : Contains name of a directory that contians my lambda handler function
+            handler (str): python file having lambda function (python_file.lambda_function)
+            
+        Returns: Aws Lambda Function
+            
+        """
         return lambda_.Function(self, id, 
         code=lambda_.Code.asset(asset), 
         handler=handler,

@@ -1,7 +1,40 @@
+# Welcome to a Web Health Monitoring App using Cloudwatch and AWS Lambda
 
-# Welcome to your CDK Python project!
+## Description
+This app uses a lambda function which is scheduled to called every five minutes to track the latency and 
+availability of our website to monitor its health. You can use the app by simply cloning the repository.
 
-This is a blank project for Python development with CDK.
+## Tech/Frameworks Used
+
+<b>Tools Used</b>
+<ul>
+  <li>Python3</li>
+  <li>AWS CDK</li>
+</ul>
+
+
+## Features
+
+This project contains the following features:
+<ul>
+  <li>Infrastructure is built with a stack containing a lambda function.</li>
+  <li>Lambda function measure the latency and checks the availability of the website.</li>
+</ul>
+
+## Code Explanation
+
+### InfraStack
+Stack is created inside the infra_stack.py file to create the infrastructure. AWS lambda function is created inside it to monitor the web health, which is defined in web_health_publisher file.
+This lambda function is scheduled to run for every five minutes using event bridge i.e. AWS Lambda Event Target.
+
+### AWS Lambda Function
+Lambda function runs our code on a high-availability compute infrastructure and performs all of the administration of the compute resources, 
+including server and operating system maintenance, capacity provisioning and automatic scaling, code monitoring and logging. 
+
+
+# How to run the project
+
+You can visit <a href=https://docs.aws.amazon.com/cdk/latest/guide/work-with.html#work-with-prerequisites>AWS CDK installation link</a>. After installing it you can simply clone this repository and follow the instructions provided below: 
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
