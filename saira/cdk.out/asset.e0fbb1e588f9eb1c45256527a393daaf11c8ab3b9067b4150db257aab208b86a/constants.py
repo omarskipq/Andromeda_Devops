@@ -1,1 +1,0 @@
-URLS_TO_MONITER="https://wbww.skipq.org/"
