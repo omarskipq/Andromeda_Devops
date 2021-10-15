@@ -17,7 +17,7 @@ class InfraStackMubashirWebHealth(cdk.Stack):
         # The code that defines your stack goes here
         web_health_lambda = self.create_lambda("Mubashir_WebHealth", "./lambda", "web.lambda_health")
         
-        
+        # Cloudwatch/Bridge Event Rule
         myRule = aws_events.Rule(
             self, "Checker",
             schedule=aws_events.Schedule.rate(cdk.Duration.minutes(5)),
@@ -27,6 +27,9 @@ class InfraStackMubashirWebHealth(cdk.Stack):
     
     
     def create_lambda(self, id, asset, handler):
+        """
+        Creates and returns a Lambda function
+        """
         return lambda_.Function(self, id, 
             code=lambda_.Code.asset(asset),
             handler=handler,
