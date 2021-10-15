@@ -1,4 +1,4 @@
-# WebSite Maintenance Tool
+# WebSite Health Tool
 - This is a tool that will let users know about availability and latency of website.
 # How to Run
 - crearte a vitual environment.
