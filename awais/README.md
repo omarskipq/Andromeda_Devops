@@ -5,7 +5,6 @@
 - crearte a vitual environment.
 - move to infra directory where we have app.y and requirements.txt file.
 - install requirements using requirements.txt file by following command.
-- 
 ```
 python -m pip install -r requirements.txt
 ```
