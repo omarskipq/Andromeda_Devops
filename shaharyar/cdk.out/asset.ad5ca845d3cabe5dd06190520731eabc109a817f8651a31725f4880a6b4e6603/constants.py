@@ -1,1 +1,0 @@
-URLs = ['https://www.skipq.org/']
