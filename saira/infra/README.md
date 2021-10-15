@@ -4,7 +4,10 @@
 This project implements a periodic lambda to check latency and availability of urls passed. The project has been implements on Cloud 9 using aws-cdk
 The lmabda function runs every 5 minute to moniter URL and return status results
 #### Teachnologies used
--python 3
+Markup : * python3
+              * Nested bullet
+                  * Sub-nested bullet etc
+          * Bullet list item 2
 ```txt
   Usage:
     $ github-standard-labels <username> <project>
