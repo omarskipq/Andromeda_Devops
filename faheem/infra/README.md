@@ -1,4 +1,4 @@
-# Welcome to a Web Health Monitoring App using Cloudwatch and AWS Lambda
+# Welcome to a Web Health Monitoring App using AWS Lambda
 
 ## Description
 This app uses a lambda function which is scheduled to called every five minutes to track the latency and 
