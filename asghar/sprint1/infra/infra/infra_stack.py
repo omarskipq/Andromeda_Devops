@@ -19,29 +19,30 @@ class AsgharInfraStack(cdk.Stack):
         # The code that defines your stack goes here
         role  = self.lambda_role()
         #The lambda construct that will run lambda function with given parameters below.
-        lambda1_service = self.create_lambda('Andromeda_asghar', './infra/lambda_functions/', 'lambda_services.web_health_checker', role)
+        lambda1_service = self.create_lambda(id = 'Andromeda_asghar', asset = './infra/lambda_functions/',
+                                                    handler = 'lambda_services.web_health_checker',role = role)
         ## Caling the aws_cdk.aws_events.Rule here that is defined below as a lambda_event. 
-        lambda_event = self.create_event('AsgharLambdaEvent',5,lambda1_service) #handler = object of lambda function constructor.
+        lambda_event = self.create_event(id = 'AsgharLambdaEvent', minutes = 5, target = lambda1_service) #handler = object of lambda function constructor.
     
     
     def lambda_role(self):
+    
         LambdaRole = aws_iam.Role(self, "lambda_role",
-        assumed_by = aws_iam.ServicePrincipal("lambda.amazonaws.com"),
-        managed_policies= [
-            aws_iam.ManagedPolicy.from_aws_managed_policy_name("service-role/AWSLambdaBasicExecutionRole")
-            ]
-            )
+            assumed_by = aws_iam.ServicePrincipal("lambda.amazonaws.com"),
+            managed_policies= [
+                aws_iam.ManagedPolicy.from_aws_managed_policy_name("service-role/AWSLambdaBasicExecutionRole")])
+    
         return LambdaRole
     
     def create_lambda(self, id, asset, handler, role):
         return aws_lambda.Function(self, id, 
-        code = aws_lambda.Code.asset(asset),
-        handler = handler,
-        runtime = aws_lambda.Runtime.PYTHON_3_6,
-        role = role
-        )
+            code = aws_lambda.Code.asset(asset),
+            handler = handler,
+            runtime = aws_lambda.Runtime.PYTHON_3_6,
+            role = role)
         
-    def create_event(self, id, time, target):
+    def create_event(self, id, minutes, target):
         return aws_events.Rule(self,id,
-        schedule = aws_events.Schedule.rate(core.Duration.minutes(time)),#defining time duration of time minutes
-        targets   = [ aws_events_targets.LambdaFunction(handler =target)]) #targets should be returned as a sequence here.
+            schedule = aws_events.Schedule.rate(core.Duration.minutes(minutes)),#defining time duration of time minutes
+            targets   = [ aws_events_targets.LambdaFunction(handler =target)]) #targets should be returned as a sequence here.
+            
