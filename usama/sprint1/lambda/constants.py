@@ -1,0 +1,1 @@
+URLS_TO_MONITOR = ["https://www.skipq.org/", "https://www.udacity.com/", "https://www.nasa.gov/"]
