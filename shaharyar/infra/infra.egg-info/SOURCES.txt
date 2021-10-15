@@ -1,6 +1,0 @@
-README.md
-infra/infra.egg-info/PKG-INFO
-infra/infra.egg-info/SOURCES.txt
-infra/infra.egg-info/dependency_links.txt
-infra/infra.egg-info/requires.txt
-infra/infra.egg-info/top_level.txt
