@@ -3,7 +3,6 @@ import urllib.request
 import time
 
 def handler(event, context):
-    print("inside latency lambda handler")
     url = CONSTANTS.URL
     return dict(
             {
