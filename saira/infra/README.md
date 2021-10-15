@@ -1,3 +1,1 @@
-# Web Health Monitering
-## Skipq_Cohort 2021: Sprint 1
-
+<h1 align="center">Web Health Monitering</h1>
