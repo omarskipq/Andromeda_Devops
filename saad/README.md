@@ -1,7 +1,7 @@
 # Training Details
 The folders in this directory contain all the work I have done during every sprint. I will update as soon as I finish a sprint.
 
-# Sprint Details
+### Sprint Details
 
 <table>
   <tr>
