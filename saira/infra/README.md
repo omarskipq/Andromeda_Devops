@@ -1,3 +1,3 @@
 # Web Health Monitering
-## Skipq_Cohort_2021
-### Sprint_1
+## Skipq_Cohort 2021: Sprint 1
+
