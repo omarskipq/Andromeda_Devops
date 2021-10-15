@@ -19,10 +19,12 @@ class InfraStack(cdk.Stack):
         latency_lambda = self.create_lambda('AndromedaLambdaShazib','./lambda', 'latency_handler.handler')
     
         # Add a scheduler 
-        lambda_schedule = aws_events.Schedule.rate(core.Duration.minutes(5))
-        lambda_event_target = aws_events_targets.LambdaFunction(handler=latency_lambda)
-        lambda_run_rule = aws_events.Rule(self, "latency_lambda_rule", schedule = lambda_schedule, targets = [lambda_event_target])
+        self.create_periodic_lambda(self, "AndromedaShazibPeriodicLambda", 5, latency_lambda)
 
+    def create_periodic_lambda(self, id, time_interval, lambda_function):
+        lambda_schedule = aws_events.Schedule.rate(core.Duration.minutes(time_interval))
+        lambda_event_target = aws_events_targets.LambdaFunction(handler=lambda_function)
+        lambda_run_rule = aws_events.Rule(self, id, schedule = lambda_schedule, targets = [lambda_event_target])
 
     def create_lambda(self, id, asset, handler):
         return lambda_.Function(
