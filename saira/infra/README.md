@@ -1,12 +1,10 @@
 # Web Health Monitering 
-### SkipQ Cohort 2021: Sprint One [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
+### SkipQ Cohort 2021: Sprint One
 
-[![npm version][2]][3] [![build status][4]][5]
-[![downloads][8]][9] [![js-standard-style][10]][11]
-
-Create a standard set of issue labels for a GitHub project
-
-## Usage
+This project implements a periodic lambda to check latency and availability of urls passed. The project has been implements on Cloud 9 using aws-cdk
+The lmabda function runs every 5 minute to moniter URL and return status results
+#### Teachnologies used
+-python 3
 ```txt
   Usage:
     $ github-standard-labels <username> <project>
