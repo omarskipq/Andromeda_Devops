@@ -15,6 +15,6 @@ def checkAvailabilityAndLatency(event):
         availability = False
     startTime = time.time()
     openurl = http.request('GET', url)
-    latency = time.time()-startTime
+    latency = round((time.time()-startTime),6)
     return {"availability":availability, "latency":latency}
     
