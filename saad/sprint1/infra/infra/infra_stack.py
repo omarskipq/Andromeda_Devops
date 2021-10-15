@@ -1,4 +1,3 @@
-from aws_cdk import core as cdk
 
 # For consistency with other languages, `cdk` is the preferred import name for
 # the CDK's core module.  The following line also imports it as `core` for use
@@ -23,8 +22,9 @@ class InfraStackSaad(cdk.Stack):
         lambda_event_target=aws_events_targets.LambdaFunction(web_metric_lambda)
         #Defining an AWS Event Rule that links the schedule with the target and creates a CloudWatch EventRule
         lambda_run_rule=aws_events.Rule(self,'saadWebMetricSchedules',#id
-        description='Monitoring Website Health Every 5 mnutes',
-        schedule=lambda_schedule,
+        description='Monitoring Website Health Every 5 mnutes',#description of rule it is optional
+        schedule=lambda_schedule, #Define your cron or rate expression over here
+        #define the lambda handler on which we need to apply the schedule in targets in the form of a list.
         targets=[lambda_event_target])
 
     def create_lambda(self,id,asset,handler):
@@ -34,7 +34,7 @@ class InfraStackSaad(cdk.Stack):
         Args:
             id (str) : Contains a string which acts as an ID
             asset (str) : Contains name of a directory that contians my lambda handler function
-            handler (str): Contains name of the python file and the lambda handler functions name separated by a '.'
+            handler (str): Contains name of the python file and the lambda handler functions name inside that file separated by a '.'
             
         Returns:
             
