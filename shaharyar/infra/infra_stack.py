@@ -31,6 +31,10 @@ class InfraStackShaharyar(cdk.Stack):
         targets=[event_lambda_target])
         
     def create_lambda(self, id, asset, handler):
+        # Arguments
+        # id: String (Creates function with this id)
+        # asset: String. Directory of folder of the lambda function
+        # handler: String. Handler file and the handler function
         return lambda_.Function(self, id,
         code=lambda_.Code.asset(asset),
         handler=handler,

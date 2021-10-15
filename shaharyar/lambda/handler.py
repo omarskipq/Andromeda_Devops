@@ -12,13 +12,16 @@ def health_web(event,context):
     }
     
 def get_availability(url):
-    response = requests.get(url)
-    if response.status_code == 200: # Status code 200 means website loaded successfully hence available
-        availability =1
+    # Arguments
+    # Input: url (Url of website to monitor)
+    # Returns 1 if website is available, 0 if it is not
+    if requests.get(url).status_code == 200: # Status code 200 means website loaded successfully hence available
+        return 1
     else:
-        availability=0    
-    return availability
+        return 0    
 
 def get_latency(url):
-    latency = requests.get(url).elapsed.total_seconds() #Latency in seconds
-    return latency
+    # Arguments
+    # Input: url (Url of website to monitor)
+    # Returns (Latency of website in seconds)
+    return  requests.get(url).elapsed.total_seconds() #Latency in seconds
