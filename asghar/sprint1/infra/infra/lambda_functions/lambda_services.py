@@ -92,7 +92,7 @@ def web_health_checker(event, contex):
     console have provided dictionary key "availability" as "check", otherwise user will get message
     to provide key.
         
-    Similarl case is with web_latency check. 
+    Similar case is with web_latency check. 
         
     The function will return dictionary with website name, website availability and web_latency latency data.
     '''
@@ -108,6 +108,6 @@ def web_health_checker(event, contex):
         latency = 'Check latency by using check as a value in latency key'
     
     return  {   'Website:': urls_data['SkipQ'],
-                'availability': availability,'latency': latency }
+                'availability': availability, 'latency': latency }
                 
     
