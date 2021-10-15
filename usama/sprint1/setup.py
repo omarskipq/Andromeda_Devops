@@ -22,9 +22,6 @@ setuptools.setup(
         "aws-cdk.core==1.122.0",
         "aws-cdk.aws-s3==1.122.0",
         "aws-cdk.aws-lambda==1.122.0",
-        "aws-cdk.aws-iam==1.122.0",
-        "aws-cdk.aws_events==1.122.0",
-        "aws-cdk.aws_events_targets==1.122.0"
     ],
 
 

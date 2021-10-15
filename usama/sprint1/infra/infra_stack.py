@@ -4,7 +4,6 @@
 # being updated to use `cdk`.  You may delete this import if you don't need it.
 
 from aws_cdk import core as cdk
-from aws_cdk import core
 from aws_cdk import aws_lambda as lambda_
 from aws_cdk import aws_events
 from aws_cdk import aws_events_targets
@@ -17,8 +16,8 @@ class InfraStackUsama(cdk.Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         # The code that defines your stack goes here
-        web_health_lambda = self.create_lambda('AndromedaLambda', './lambda', 'web_health_publisher.health_monitor')
-        self.periodic_lambda("AndromedaLambdaPeriodic", 5, web_health_lambda)
+        web_health_lambda = self.create_lambda('AndromedaLambda', './lambda', 'web_health_publisher.health_monitor')  #LAMBDA CREATION
+        self.periodic_lambda("AndromedaLambdaPeriodic", 5, web_health_lambda)  #CALLING PERIODIC LAMBDA WITH web_health_llambda AS TARGET
         
     
     def create_lambda(self, id, asset, handler):
@@ -30,6 +29,15 @@ class InfraStackUsama(cdk.Stack):
         
     
     def periodic_lambda(self, id, duration_in_minutes, lambda_fun,):
-        lambda_schedule = aws_events.Schedule.rate(core.Duration.minutes(duration_in_minutes))
+        """Set a specific a lambda function to run periodically.
+
+        Args:
+        duration_in_minutes: int. A time duration after which lambda will repeat its execution
+        lambda_fun: construct. That one lambda which is supposed to run periodically
+    
+        Returns:
+                None
+        """
+        lambda_schedule = aws_events.Schedule.rate(cdk.Duration.minutes(duration_in_minutes))
         target_lambda = aws_events_targets.LambdaFunction(lambda_fun)
         Rule = aws_events.Rule(self, id, schedule = lambda_schedule, targets = [target_lambda])
