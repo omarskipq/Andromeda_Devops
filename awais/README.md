@@ -7,5 +7,4 @@
 - python -m pip install -r requirements.txt.
 - sysnthesize code by cdk synth command.
 - deploy code on cloud by cdk deploy command.
-- 
 
