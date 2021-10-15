@@ -6,13 +6,9 @@ def print_fun(event, contex):
 import urllib3
 import time
 from urls_data_file import urls_data as urls_
-latency = 'Check latency by using check as a value in key (i.e. {"latency":"check"})'
-availability = 'Check availability by using check as a value in key (i.e. {"latency":"check"})'
-
 
 
 def web_availability():
-    global availability
     url = urls_['SkipQ']
     availability = (urllib3.PoolManager().request('GET', url)).status
     if availability>= 100 and availability<=199:
@@ -39,19 +35,17 @@ def web_availability():
     return availability
 
 def web_latency():
-    global latency
     url = urls_['SkipQ']
     start_time = time.time()
     time_watch = urllib3.PoolManager().request('GET', url)
-    end_time = time.time()
+    latency = time.time()
     
     
-    latency = end_time - start_time
+    latency -= start_time
     latency =f"The Response time for ({urls_['SkipQ']}) is {latency} seconds" 
     return latency
 
 def web_health_checker(event, contex):
-    global latency, availability
     if event.get('availability','') == 'check':
         
         availability = web_availability()
