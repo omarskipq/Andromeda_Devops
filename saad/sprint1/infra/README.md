@@ -32,11 +32,17 @@ This project contains the following features:
 
 ## AWS CDK Stack
 
+The file infra_stack.py contains the code that makes my stack. This file was created by AWS CDK upon project creation. It contains a class with the name of my stack which contains a construct. Inside this constructor I have defined an AWS Lambda Event Schedule, an AWS Lambda Event Target,an AWS Event Rule, and a call to a function that creates our AWS lambda function instance.
 
+## AWS Lambda Function
 
-# Welcome to your CDK Python project!
+The lambda handler present in web_metrics.py file calls a function read_url_FROMConstants to read constants defined in web_constants.py file and extract the url. On the extracted url we run the web_metrics function that using urllib3 and time python packages gives us information on the availability and latency of that url.
 
-This is a blank project for Python development with CDK.
+# Installation
+
+You can visit <a href=https://docs.aws.amazon.com/cdk/latest/guide/work-with.html#work-with-prerequisites>AWS CDK installation link</a>. After installing it you can simply fork this repository and follow the usage instructions provided below 
+
+# Usage
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
