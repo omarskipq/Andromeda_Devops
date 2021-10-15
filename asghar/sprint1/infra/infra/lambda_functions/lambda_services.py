@@ -1,63 +1,103 @@
+import urllib3
+import time
+from urls_data_file import urls_data as ud
+
+
+'''
+print_fun(): Function Defination
+    This is simple lambda print function for checking how lambda function can be used to send out print message on cloud.
 '''
 def print_fun(event, contex):
     message = f"Hello and Welcome {event.get('first_name','')} {event.get('last_name','')}"
     return message
+
+
+
 '''
-import urllib3
-import time
-from urls_data_file import urls_data as urls_
+web_availability (): function Defination
 
-
-def web_availability():
-    url = urls_['SkipQ']
-    availability = (urllib3.PoolManager().request('GET', url)).status
-    if availability>= 100 and availability<=199:
-        availability = f"Website {urls_['SkipQ']} is giving us Informational response"
-    elif availability>= 200 and availability<=299:
-        availability = f"Website {urls_['SkipQ']} is giving us Successful response"
-    elif availability>= 300 and availability<=399:
-        availability = f"Website {urls_['SkipQ']} is giving us Redirects"
-    elif availability>= 400 and availability<=499:
-        availability = f"Website {urls_['SkipQ']} is giving us Client errors"
-    elif availability>= 500 and availability<=599:
-        availability = f"Website {urls_['SkipQ']} is giving us Server errors"
+    This function will check the availability of website that is pointed by using dictionary ud[]
+    ud[] is a dictionary that will contain urls data (that we need to check) and is located in uddata_file.py
     
-    #SLEF NOTE FOR LATER UPGRADATION
-    '''
+    urllib3 is being used for genrating request and to check that status of request.
+    
+    The returned availability variable will contain string according to the request status we recieved.
+    
+    Following are request statuses.
+    
     Informational responses (100–199)
     Successful responses (200–299)
     Redirects (300–399)
     Client errors (400–499)
     Server errors (500–599)
-    '''
-    
+
+'''
+def web_availability():
+    url = ud['SkipQ']
+    availability = (urllib3.PoolManager().request('GET', url)).status
+    if availability>= 100 and availability<=199:
+        availability = f"Website {ud['SkipQ']} is giving us Informational response"
+    elif availability>= 200 and availability<=299:
+        availability = f"Website {ud['SkipQ']} is giving us Successful response"
+    elif availability>= 300 and availability<=399:
+        availability = f"Website {ud['SkipQ']} is giving us Redirects"
+    elif availability>= 400 and availability<=499:
+        availability = f"Website {ud['SkipQ']} is giving us Client errors"
+    elif availability>= 500 and availability<=599:
+        availability = f"Website {ud['SkipQ']} is giving us Server errors"
     
     return availability
 
+
+'''
+web_latency():  function Defination
+
+    This function will check latency of website that is being provided by using ud[] dictionary
+    ud[] is a dictionary that will contain urls data (that we need to check) and is located in urls_data_file.py
+    
+    first time function is used to capture the instantaneous time 
+    Then urllib3 is being used for genrating request and to check that status of request.
+    Then Latency is calculated by checking again the time taken by website to send back reqeust - initial time
+    
+    The returned latency variable will contain string containig website name and time in seconds.
+
+'''
 def web_latency():
-    url = urls_['SkipQ']
+    url = ud['SkipQ']
     start_time = time.time()
     time_watch = urllib3.PoolManager().request('GET', url)
-    latency = time.time()
-    
-    
-    latency -= start_time
-    latency =f"The Response time for ({urls_['SkipQ']}) is {latency} seconds" 
+    latency = time.time() - start_time
+    latency =f"The Response time for ({ud['SkipQ']}) is {latency} seconds" 
     return latency
 
+
+'''
+web_health_checker(event, contex):  function Defination
+
+    This is lambda function which will call web_latency and web_availability functions to check latency and
+    availability of website and send it back to aws cloud that is being defined by aws CDK.
+    
+    The function will have a test case scenario where it will only check web_availability if user on lambda
+    console have provided dictionary key "availability" as "check", otherwise user will get message
+    to provide key.
+    
+    Similarl case is with web_latency check. 
+    
+    The function will return dictionary with website name, website availability and web_latency latency data.
+'''
 def web_health_checker(event, contex):
     if event.get('availability','') == 'check':
         
         availability = web_availability()
     else:
-        availability = 'Check availability by using check as a value in key'
+        availability = 'Check availability by using check as a value in availability key'
     if event.get('latency', '') == 'check':
         latency =  web_latency()
     else:
-        latency = 'Check latency by using check as a value in key'
+        latency = 'Check latency by using check as a value in latency key'
     
     results = {
-        'Website:': urls_['SkipQ'],
+        'Website:': ud['SkipQ'],
         'availability': availability,
         'latency': latency
     }

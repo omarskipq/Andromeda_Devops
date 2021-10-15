@@ -1,9 +1,6 @@
 
-# Welcome to your CDK Python project!
+## Welcome to Website Health Checker Python project!
 
-This is a blank project for Python development with CDK.
-
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
 This project is set up like a standard Python project.  The initialization
 process also creates a virtualenv within this project, stored under the `.venv`
