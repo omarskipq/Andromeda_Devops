@@ -1,14 +1,21 @@
-# This file defines handler function for Lambda function
-# Import files that need to be used in the project
-import constants
+# This file defines handler function for Lambda function, for this project the function we are using is named health_web
+
+# Import files and classes form files that need to be used in the project
+import url_retriever
+from cloud_watch import CloudWatchMetrics
+
 # Import libraries that need to be used in the project
 import urllib3
 import datetime
+import constants
+import json
+import boto3
 
 '''
 Function health_web(event, context)
 
-Description  : A handler function that finds latency and page availability of a website
+Description  : A handler function that finds latency and page availability of each website present in a list
+			   retrieved from a S3 bucket
                 
 Parameters   : event, context
 
@@ -21,51 +28,72 @@ Parameters   : event, context
                and runtime environment.
    
 Return       : Returns a dictionary named dict_latency_availability that contains info about latency and page availability of a website.
-   			   The dictionary key "page_available" has key value "Success" if website is available else the key
-			   has value of "Failure"
+   			   The dictionary key "page_available" has key value 1 if website is available else the key
+			   has value of 0
 			   The dictionary key "latency_in_seconds"  has key value of latency in seconds
 '''
 
 def health_web(event, context):
-	# Get the url of website
-	url=constants.URLS_TO_MONITOR
+	
+	# Initiating CloudWatch metrics
+	cw_metric=CloudWatchMetrics()
+	# Retrieving list of URl to monitor from a S3 bucket
+	list_of_urls=url_retriever.url_list()
+	# Initiating Pool Manager
 	http = urllib3.PoolManager()
-	# Call function get_latency to get latency
-	latency_url=get_latency(url, http)
-	# Call function get_availability to get availability
-	availability_url=get_availability(url, http)
-	# Initialize a dictionary to store latency and availability results
+	# Initiating a dictionary to store latency and availability values
 	dict_latency_availability=dict()
-	dict_latency_availability["latency_in_seconds"]=latency_url
-	dict_latency_availability["page_available"]=availability_url
+	
+	# A loop to iterate over all websites in a list and store their latency and availiability values, while also defining their metrics
+	for i in list_of_urls:
+		
+	   # Get latency value
+	   latency_url=get_latency(i, http)
+	   # get availability value
+	   availability_url=get_availability(i, http)
+	   # Defining dimensions for metric
+	   dimensions=[{
+	       'Name':'website name',
+	       'Value':i
+	   },
+	   ]
+	   
+	   # Defining metrics for availability and latency of a website
+	   cw_metric.put_metric(constants.URL_MONITOR_NAMESPACE, dimensions, constants.URL_MONITOR_METRIC_AVAILABILITY, availability_url)
+	   cw_metric.put_metric(constants.URL_MONITOR_NAMESPACE, dimensions, constants.URL_MONITOR_METRIC_LATENCY, latency_url)
+	   
+	   # Storing values of latency and availability in the dictionary
+	   dict_latency_availability["latency_in_seconds_of_{}".format(i)]=latency_url
+	   dict_latency_availability["page_available_of_{}".format(i)]=availability_url
+	   
 	return dict_latency_availability
 
 '''
-Function get _availability(url, http)
+Function get_availability(url, http)
 
 Description  : A function that finds whether a website is available by taking its URL as input
                 
 Parameters   : url-  The URL of website whose availability need to be checked
 			   http- Allows for arbitrary requests while transparently keeping track of necessary connection pools for you.
    
-Return       : Returns "Success" if website is available. If a website in unavailable it returns "Failure"
+Return       : Returns 1 if website is available. If a website in unavailable it returns 0
  
 Example of Usage:
 				url="https://www.skipq.org/"
-				get_availability(url)		====> returns "Success" if available, else returns "Failure"
+				get_availability(url)		====> returns 1 if available, else returns 0
 
 '''				
 def get_availability(url, http):
 	# request the website
 	resp = http.request('GET', url)
 	if resp.status==200:
-		return "Success"
+		return 1
 	else:
-		return "Failure"
+		return 0
 		
 
 '''
-Function get _latency(url, http)
+Function get_latency(url, http)
 
 Description  : A function that finds latency of a website.
                 
